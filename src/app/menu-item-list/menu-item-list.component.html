@@ -1,0 +1,27 @@
+<div class="menu-list-container">
+    <h2>Our Menu</h2>
+  
+    <div *ngIf="isLoading" class="loading-message">
+      Loading menu items...
+    </div>
+  
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  
+    <div *ngIf="!isLoading && !errorMessage && menuItems.length === 0" class="no-items-message">
+      No menu items available at the moment.
+    </div>
+  
+    <div class="menu-items-grid" *ngIf="menuItems.length > 0">
+      <div *ngFor="let item of menuItems" class="menu-item-card">
+        <img *ngIf="item.imageUrl" [src]="item.imageUrl" alt="{{ item.name }}" class="item-image">
+        <h3>{{ item.name }}</h3>
+        <p class="item-description">{{ item.description }}</p>
+        <div class="item-footer">
+          <span class="item-price">{{ item.price | currency:'INR':'symbol' }}</span>
+          <button (click)="addItemToCart(item)" class="add-to-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>

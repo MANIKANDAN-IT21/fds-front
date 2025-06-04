@@ -1,0 +1,44 @@
+<div class="delivery-status-container">
+    <h2>Delivery Boy Status Overview</h2>
+  
+    <div class="status-summary">
+      <div class="status-card">
+        <h3>Total Delivery Boys</h3>
+        <p>{{ totalBoys }}</p>
+      </div>
+      <div class="status-card available">
+        <h3>Available</h3>
+        <p>{{ availableBoys }}</p>
+      </div>
+      <div class="status-card busy">
+        <h3>Busy</h3>
+        <p>{{ busyBoys }}</p>
+      </div>
+      <div class="status-card on-break">
+        <h3>On Break</h3>
+        <p>{{ onBreakBoys }}</p>
+      </div>
+    </div>
+  
+    <div class="chart-section">
+      <h3>Status Distribution</h3>
+      <div class="chart-placeholder" *ngIf="totalBoys > 0">
+        <p>A pie chart or bar graph showing the distribution of "Available", "Busy", and "On Break" delivery boys would go here.</p>
+        <p>Example: Available ({{ (availableBoys / totalBoys * 100) | number:'1.0-0' }}%), Busy ({{ (busyBoys / totalBoys * 100) | number:'1.0-0' }}%), On Break ({{ (onBreakBoys / totalBoys * 100) | number:'1.0-0' }}%)</p>
+      </div>
+      <p *ngIf="totalBoys === 0">No delivery boy data available to display chart.</p>
+    </div>
+  
+    <hr>
+  
+    <h3>Individual Delivery Boy Status</h3>
+    <div class="delivery-boy-list">
+      <div class="delivery-boy-card" *ngFor="let boy of deliveryBoys">
+        <h4>{{ boy.name }} (ID: {{ boy.id }})</h4>
+        <p>Status: <span [class]="boy.status">{{ boy.status | titlecase }}</span></p>
+        <p *ngIf="boy.currentOrder">Current Order: #{{ boy.currentOrder }}</p>
+        <p *ngIf="boy.eta">ETA: {{ boy.eta }} mins</p>
+        </div>
+      <p *ngIf="deliveryBoys.length === 0">No delivery boys found.</p>
+    </div>
+  </div>

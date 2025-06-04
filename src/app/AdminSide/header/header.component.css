@@ -1,0 +1,20 @@
+html {
+  scroll-behavior: smooth;
+}
+.navbar-brand {
+  font-size: 1.6rem;
+}
+
+.nav-link {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #ffc107 !important;
+}
+
+.btn {
+  font-weight: 500;
+}

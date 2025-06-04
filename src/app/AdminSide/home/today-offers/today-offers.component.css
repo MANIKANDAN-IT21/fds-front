@@ -1,0 +1,77 @@
+.today-offers {
+    background-color: #fff8e1; /* Light yellow for offers */
+    padding: 40px 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .today-offers h2 {
+    color: #d84315; /* Dark orange */
+    margin-bottom: 30px;
+    font-size: 2.2em;
+  }
+  
+  .offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .offer-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .offer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+  
+  .offer-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .offer-card h3 {
+    color: #ff5722;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .offer-description {
+    color: #666;
+    font-size: 0.95em;
+    margin-bottom: 15px;
+  }
+  
+  .offer-rating {
+    font-size: 1.1em;
+    color: #fbc02d; /* Gold star color */
+    margin-bottom: 15px;
+  }
+  
+  .view-offer-button {
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+  }
+  
+  .view-offer-button:hover {
+    background-color: #e64a19;
+  }

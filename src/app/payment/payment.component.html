@@ -1,0 +1,19 @@
+<div class="payment-container">
+  <h2>Make Payment</h2>
+  <form (ngSubmit)="processPayment()">
+    <label for="orderId">Order ID:</label>
+    <input type="number" id="orderId" [(ngModel)]="paymentData.orderId" name="orderId" required readonly>
+    <label for="paymentMethod">Payment Method:</label>
+    <select id="paymentMethod" [(ngModel)]="paymentData.paymentMethod" name="paymentMethod" required>
+      <option value="" disabled selected>Select a payment method</option>
+      <option value="Gpay">Gpay</option>
+      <option value="Paytm">Paytm</option>
+      <option value="Credit Card">Credit Card</option>
+      <option value="Debit Card">Debit Card</option>
+    </select>
+
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" [(ngModel)]="paymentData.amount" name="amount" required readonly>
+    <button type="submit">Pay Now</button>
+  </form>
+</div>

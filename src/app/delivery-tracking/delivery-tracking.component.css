@@ -1,0 +1,66 @@
+.tracking-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  h2 {
+    color: #e44d26; /* Orange color for main headings */
+    margin-bottom: 25px;
+    font-size: 2em;
+  }
+  
+  h3 {
+    color: #555;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+  }
+  
+  p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  
+  strong {
+    color: #333;
+  }
+  
+  .tracking-updates {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 20px;
+    margin-top: 25px;
+    border-radius: 8px;
+  }
+  
+  .refresh-button {
+    background-color: #007bff; /* Blue for action button */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .refresh-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .error-message {
+    color: #d9534f; /* Red for errors */
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }

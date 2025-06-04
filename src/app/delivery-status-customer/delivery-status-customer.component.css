@@ -1,0 +1,201 @@
+.delivery-status-customer-container {
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 30px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .delivery-status-customer-container h2 {
+    color: #ff5722;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+  }
+  
+  .loading-message, .error-message {
+    padding: 30px;
+    font-size: 1.2em;
+    color: #777;
+  }
+  
+  .error-message {
+    color: #d32f2f;
+    font-weight: bold;
+  }
+  
+  .spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border-left-color: #ff5722;
+    animation: spin 1s ease infinite;
+    margin: 20px auto;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .status-card {
+    background-color: #f0f4f8; /* Light blue-gray */
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .status-card h3 {
+    color: #3f51b5;
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  
+  .status-card p {
+    margin: 8px 0;
+    font-size: 1.1em;
+    color: #555;
+  }
+  
+  .current-status span {
+    font-weight: bold;
+    font-size: 1.3em;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+  }
+  
+  .current-status .pending, .current-status .preparing { background-color: #fff3e0; color: #f57c00; } /* Orange */
+  .current-status .out_for_delivery { background-color: #e3f2fd; color: #2196F3; } /* Blue */
+  .current-status .delivered { background-color: #e8f5e9; color: #4CAF50; } /* Green */
+  .current-status .cancelled { background-color: #ffebee; color: #d32f2f; } /* Red */
+  
+  
+  .delivery-progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-bottom: 40px;
+    padding: 0 20px;
+  }
+  
+  .delivery-progress::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: #e0e0e0;
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+  
+  .delivery-progress .step {
+    text-align: center;
+    flex: 1;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .delivery-progress .circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #bdbdbd;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin: 0 auto 10px auto;
+    transition: background-color 0.3s ease;
+  }
+  
+  .delivery-progress .step.completed .circle {
+    background-color: #4CAF50; /* Green when completed */
+  }
+  
+  .delivery-progress .step p {
+    font-size: 0.9em;
+    color: #777;
+  }
+  
+  .delivery-progress .step.completed p {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .delivery-boy-info {
+    background-color: #fffde7; /* Light yellow */
+    border: 1px solid #ffe082;
+    border-radius: 8px;
+    padding: 25px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-align: left;
+  }
+  
+  .delivery-boy-info h3 {
+    color: #ff9800; /* Orange */
+    margin-top: 0;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+  }
+  
+  .delivery-icon {
+    font-size: 3em;
+    color: #ff5722;
+    flex-shrink: 0; /* Don't shrink icon */
+  }
+  
+  .boy-details p {
+    margin: 5px 0;
+    font-size: 1em;
+  }
+  
+  .boy-details a {
+    color: #2196F3;
+    text-decoration: none;
+  }
+  
+  .boy-details a:hover {
+    text-decoration: underline;
+  }
+  
+  .no-delivery-boy-message {
+    padding: 20px;
+    background-color: #e0f7fa;
+    border-radius: 8px;
+    margin-top: 20px;
+    color: #00796b;
+    font-style: italic;
+  }
+  
+  .delivered-message, .cancelled-message {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-top: 30px;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .delivered-message {
+    background-color: #dcedc8; /* Light green */
+    color: #33691e;
+  }
+  
+  .cancelled-message {
+    background-color: #ffcdd2; /* Light red */
+    color: #b71c1c;
+  }

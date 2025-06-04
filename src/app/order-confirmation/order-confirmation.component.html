@@ -1,0 +1,30 @@
+<div class="order-confirmation-container">
+    <div *ngIf="isLoading" class="loading-message">
+      <p>Loading order details...</p>
+    </div>
+  
+    <div *ngIf="errorMessage" class="error-message">
+      <p>{{ errorMessage }}</p>
+      <button class="action-button" (click)="goToHome()">Go to Home</button>
+    </div>
+  
+    <div *ngIf="!isLoading && !errorMessage && orderDetails" class="confirmation-content">
+      <div class="icon-success">
+        <i class="fas fa-check-circle"></i> </div>
+      <h2>Order Placed Successfully!</h2>
+      <p>Thank you for your order. Your food will be delivered soon!</p>
+  
+      <div class="order-summary-card">
+        <h3>Order #{{ orderDetails.id }}</h3>
+        <p><strong>Status:</strong> <span class="order-status">{{ orderDetails.status }}</span></p>
+        <p><strong>Total Amount:</strong> ₹{{ orderDetails.totalAmount | number:'1.2-2' }}</p>
+        <p><strong>Payment Method:</strong> {{ orderDetails.paymentMethod || 'Not specified' }}</p>
+        <p><strong>Order Date:</strong> {{ orderDetails.orderDate | date:'medium' }}</p>
+        </div>
+  
+      <div class="action-buttons">
+        <button class="action-button primary" (click)="trackDelivery()">Track Delivery</button>
+        <button class="action-button secondary" (click)="goToHome()">Continue Shopping</button>
+      </div>
+    </div>
+  </div>

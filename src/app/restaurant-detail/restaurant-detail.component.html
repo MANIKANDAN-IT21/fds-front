@@ -1,0 +1,12 @@
+<div class="restaurant-detail-container">
+    <div *ngIf="restaurant">
+      <div class="restaurant-header">
+        <img [src]="restaurant.image" alt="{{ restaurant.name }}" class="restaurant-banner" />
+        <h1>{{ restaurant.name }}</h1>
+        <p class="restaurant-rating">⭐ Rating: {{ restaurant.rating }}</p>
+        </div>
+  
+      <hr>
+      <app-menu-item-list></app-menu-item-list>
+      <router-outlet></router-outlet>
+  </div>

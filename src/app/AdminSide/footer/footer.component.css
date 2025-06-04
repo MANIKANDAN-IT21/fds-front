@@ -1,0 +1,33 @@
+.social-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+
+footer {
+  background-color: #222;
+}
+
+h4 {
+  color: #ffc107;
+}
+
+a {
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: #fff;
+}
+p{
+  color: #fff;
+}
+.text-muted {
+  color: rgb(255, 255, 255) !important;
+}

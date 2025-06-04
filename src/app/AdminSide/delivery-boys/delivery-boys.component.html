@@ -1,0 +1,32 @@
+<div style="text-align:center">
+    <h1>
+      Welcome to {{ title }}!
+    </h1>
+  </div>
+  
+  <h2>Agent Information</h2>
+  
+  <div *ngIf="agents.length > 0; else noAgents">
+    <table>
+      <thead>
+        <tr>
+          <th>Agent ID</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let agent of agents">
+          <td>{{ agent.agent_id }}</td>
+          <td>{{ agent.name }}</td>
+          <td>{{ agent.phone }}</td>
+          <td>{{ agent.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <ng-template #noAgents>
+    <p>No agent data available.</p>
+  </ng-template>

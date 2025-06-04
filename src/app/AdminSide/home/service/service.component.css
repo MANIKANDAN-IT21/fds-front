@@ -1,0 +1,19 @@
+.bg-wallpaper {
+    background-image: url('/assets/bg_wallpaper.png');
+    background-repeat: repeat;
+  }
+  
+  .border-dark {
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  .rounded-circle {
+    border-radius: 50%;
+  }
+  
+  .position-absolute {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  

@@ -1,0 +1,12 @@
+.map-container {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  form {
+    max-width: 400px;
+    margin: auto;
+  }
+  

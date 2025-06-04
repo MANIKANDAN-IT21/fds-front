@@ -1,0 +1,105 @@
+.order-confirmation-container {
+    padding: 40px 20px;
+    max-width: 700px;
+    margin: 30px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .loading-message, .error-message {
+    padding: 30px;
+    font-size: 1.2em;
+    color: #777;
+  }
+  
+  .error-message {
+    color: #d32f2f;
+    font-weight: bold;
+  }
+  
+  .icon-success {
+    color: #4CAF50; /* Green */
+    font-size: 5em;
+    margin-bottom: 20px;
+  }
+  
+  .order-confirmation-container h2 {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 15px;
+  }
+  
+  .order-confirmation-container p {
+    color: #666;
+    font-size: 1.1em;
+    margin-bottom: 25px;
+  }
+  
+  .order-summary-card {
+    background-color: #e8f5e9; /* Light green */
+    border: 1px solid #a5d6a7;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+    text-align: left;
+  }
+  
+  .order-summary-card h3 {
+    color: #388e3c; /* Dark green */
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  
+  .order-summary-card p {
+    margin: 8px 0;
+    font-size: 1em;
+    color: #444;
+  }
+  
+  .order-summary-card strong {
+    color: #222;
+  }
+  
+  .order-status {
+    font-weight: bold;
+    color: #ff5722; /* Orange for status */
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .action-button {
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .action-button.primary {
+    background-color: #ff5722; /* Orange */
+    color: white;
+  }
+  
+  .action-button.primary:hover {
+    background-color: #e64a19;
+    transform: translateY(-2px);
+  }
+  
+  .action-button.secondary {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+  }
+  
+  .action-button.secondary:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+  }

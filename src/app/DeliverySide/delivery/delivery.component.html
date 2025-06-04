@@ -1,0 +1,83 @@
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Delivery Hub</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <button class="btn btn-outline-light" (click)="logout()">Logout</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+    <div class="container mt-4">
+      <h2 class="mb-4">Assigned Deliveries</h2>
+  
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-search"></i></span>
+          <input type="text" class="form-control" placeholder="Search by ID or Status..."
+                 [(ngModel)]="searchTerm" (input)="applyFilter()">
+        </div>
+      </div>
+  
+      <div *ngIf="filteredDeliveries.length === 0" class="alert alert-info" role="alert">
+        No deliveries found or assigned.
+      </div>
+  
+      <div *ngIf="filteredDeliveries.length > 0" class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>Delivery ID</th>
+              <th>Order ID</th>
+              <th>Agent ID</th>
+              <th>Status</th>
+              <th>Update Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of filteredDeliveries">
+              <td>{{ order.deliveryId }}</td>
+              <td>{{ order.orderId }}</td>
+              <td>{{ order.agentId }}</td>
+              <td>
+                <span class="badge"
+                      [ngClass]="{
+                        'bg-warning text-dark': order.status === 'Pending',
+                        'bg-info': order.status === 'In Transit',
+                        'bg-success': order.status === 'Delivered'
+                      }">
+                  {{ order.status }}
+                </span>
+              </td>
+              <td>
+                <div class="input-group">
+                  <select class="form-select" [(ngModel)]="order.status">
+                    <option value="Pending">Pending</option>
+                    <option value="In Transit">In Transit</option>
+                    <option value="Delivered">Delivered</option>
+                  </select>
+                  <button class="btn btn-primary" (click)="updateStatus(order.deliveryId, order.status)">Update</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <footer class="footer mt-auto py-3 bg-dark text-white text-center">
+      <div class="container">
+        <span>&copy; 2025 Delivery Hub. All rights reserved.</span>
+      </div>
+    </footer>
+  </div>
