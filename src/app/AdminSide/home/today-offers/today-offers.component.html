@@ -1,55 +1,73 @@
-<div class="container mt-4">
-  <h2>Top Brand Restaurants</h2>
-  <div class="row justify-content-center">
+<div class="top-brands-section">
+  <h2 class="section-title">Top Brand Restaurants</h2>
+  <div class="brands-grid">
     <!-- Card 1 -->
-    <div class="col-md-2">
-      <div class="card text-center rounded-circle  overflow-hidden" style="width: 10rem; height: 10rem;">
-        <img src="https://picsum.photos/200/200" class="card-img-top" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
+    <div class="brand-card">
+      <div class="brand-circle-img">
+        <img src="https://placehold.co/200x200/F44336/FFFFFF?text=Brand+1" alt="Brand 1" class="brand-img">
       </div>
+      <p class="brand-name">Brand Delights</p>
     </div>
     <!-- Card 2 -->
-    <div class="col-md-2">
-      <div class="card text-center rounded-circle overflow-hidden" style="width: 10rem; height: 10rem;">
-        <img src="https://picsum.photos/201/200" class="card-img-top" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
+    <div class="brand-card">
+      <div class="brand-circle-img">
+        <img src="https://placehold.co/200x200/4CAF50/FFFFFF?text=Brand+2" alt="Brand 2" class="brand-img">
       </div>
+      <p class="brand-name">Gourmet Bites</p>
     </div>
     <!-- Card 3 -->
-    <div class="col-md-2">
-      <div class="card text-center rounded-circle overflow-hidden" style="width: 10rem; height: 10rem;">
-        <img src="https://picsum.photos/202/200" class="card-img-top" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
+    <div class="brand-card">
+      <div class="brand-circle-img">
+        <img src="https://placehold.co/200x200/2196F3/FFFFFF?text=Brand+3" alt="Brand 3" class="brand-img">
       </div>
+      <p class="brand-name">Flavor Fusion</p>
     </div>
     <!-- Card 4 -->
-    <div class="col-md-2">
-      <div class="card text-center rounded-circle overflow-hidden" style="width: 10rem; height: 10rem;">
-        <img src="https://picsum.photos/203/200" class="card-img-top" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
+    <div class="brand-card">
+      <div class="brand-circle-img">
+        <img src="https://placehold.co/200x200/FFC107/FFFFFF?text=Brand+4" alt="Brand 4" class="brand-img">
       </div>
+      <p class="brand-name">Spice Route</p>
     </div>
     <!-- Card 5 -->
-    <div class="col-md-2">
-      <div class="card text-center rounded-circle overflow-hidden" style="width: 10rem; height: 10rem;">
-        <img src="https://picsum.photos/204/200" class="card-img-top" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
+    <div class="brand-card">
+      <div class="brand-circle-img">
+        <img src="/img1.jpg" alt="Brand 5" class="brand-img">
       </div>
+      <p class="brand-name">Urban Eatery</p>
     </div>
     <!-- Card 6 -->
-    <div class="col-md-2">
-      <div class="card text-center rounded-circle overflow-hidden" style="width: 10rem; height: 10rem;">
-        <img src="https://picsum.photos/205/200" class="card-img-top" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
+    <div class="brand-card">
+      <div class="brand-circle-img">
+        <img src="https://placehold.co/200x200/00BCD4/FFFFFF?text=Brand+6" alt="Brand 6" class="brand-img">
       </div>
+      <p class="brand-name">Quick Grub</p>
     </div>
   </div>
 </div>
 
-<section class="today-offers">
-    <h2>🔥 Today's Hot Offers! 🔥</h2>
-    <div class="offers-grid">
-      <div class="offer-card" *ngFor="let offer of todayOffers">
-        <img [src]="offer.image" alt="{{ offer.name }}" class="offer-image">
+
+<section class="today-offers-section">
+  <h2 class="section-title">🔥 Today's Hot Offers! 🔥</h2>
+  <div class="offers-grid">
+    <div class="offer-card" *ngFor="let offer of todayOffers">
+      <img [src]="offer.image" alt="{{ offer.name }}" class="offer-image">
+      <div class="offer-content">
         <h3>{{ offer.name }}</h3>
         <p class="offer-description">Special discount on all items!</p>
-        <p class="offer-rating">⭐ Rating: {{ offer.rating }}</p>
-        <button class="view-offer-button">View Offer</button>
+        <div class="offer-meta">
+          <span class="offer-rating">
+            <i class="fas fa-star"></i> {{ offer.rating }}
+          </span>
+          <span class="offer-discount">
+            <i class="fas fa-tags"></i> Up to 20% OFF!
+          </span>
+        </div>
+        <button class="view-offer-button">View Offer <i class="fas fa-arrow-right"></i></button>
       </div>
-      <p *ngIf="todayOffers.length === 0">No special offers available today. Check back later!</p>
     </div>
-  </section>
+    <p *ngIf="todayOffers.length === 0" class="no-offers-message">
+      <i class="fas fa-sad-tear"></i> No special offers available today. Check back later!
+    </p>
+  </div>
+</section>

@@ -1,19 +1,70 @@
 <div class="payment-container">
-  <h2>Make Payment</h2>
-  <form (ngSubmit)="processPayment()">
-    <label for="orderId">Order ID:</label>
-    <input type="number" id="orderId" [(ngModel)]="paymentData.orderId" name="orderId" required readonly>
-    <label for="paymentMethod">Payment Method:</label>
-    <select id="paymentMethod" [(ngModel)]="paymentData.paymentMethod" name="paymentMethod" required>
-      <option value="" disabled selected>Select a payment method</option>
-      <option value="Gpay">Gpay</option>
-      <option value="Paytm">Paytm</option>
-      <option value="Credit Card">Credit Card</option>
-      <option value="Debit Card">Debit Card</option>
-    </select>
+  <h2 class="payment-title">Complete Your Order</h2>
 
-    <label for="amount">Amount:</label>
-    <input type="number" id="amount" [(ngModel)]="paymentData.amount" name="amount" required readonly>
-    <button type="submit">Pay Now</button>
+  <div class="order-summary-display">
+    <p class="summary-item">Order ID: <strong>#{{ paymentData.orderId }}</strong></p>
+    <p class="summary-item">Amount Due: <strong>₹{{ paymentData.amount | number:'1.2-2' }}</strong></p>
+  </div>
+
+  <form (ngSubmit)="processPayment()" class="payment-form">
+    <div class="form-group">
+      <label for="paymentMethod">Choose Payment Method:</label>
+      <select id="paymentMethod" [(ngModel)]="paymentData.paymentMethod" name="paymentMethod" required class="form-control">
+        <option value="" disabled selected>Select a payment method</option>
+        <option value="Gpay">Gpay</option>
+        <option value="Paytm">Paytm</option>
+        <option value="Credit Card">Credit Card</option>
+        <option value="Debit Card">Debit Card</option>
+        <option value="Net Banking">Net Banking</option>
+      </select>
+    </div>
+
+    <ng-container *ngIf="paymentData.paymentMethod === 'Credit Card' || paymentData.paymentMethod === 'Debit Card'">
+      <div class="form-group">
+        <label for="cardNumber">Card Number:</label>
+        <input type="text" id="cardNumber" [(ngModel)]="cardDetails.cardNumber" name="cardNumber" required placeholder="XXXX XXXX XXXX XXXX" class="form-control" maxlength="19">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="expiryDate">Expiry Date:</label>
+          <input type="text" id="expiryDate" [(ngModel)]="cardDetails.expiryDate" name="expiryDate" required placeholder="MM/YY" class="form-control" maxlength="5">
+        </div>
+        <div class="form-group">
+          <label for="cvv">CVV:</label>
+          <input type="text" id="cvv" [(ngModel)]="cardDetails.cvv" name="cvv" required placeholder="XXX" class="form-control" maxlength="4">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cardHolderName">Cardholder Name:</label>
+        <input type="text" id="cardHolderName" [(ngModel)]="cardDetails.cardHolderName" name="cardHolderName" required placeholder="Name on Card" class="form-control">
+      </div>
+    </ng-container>
+
+    <button type="submit" class="pay-now-btn" [disabled]="isLoading">
+      <span *ngIf="!isLoading">Pay Now</span>
+      <span *ngIf="isLoading">Processing...</span>
+    </button>
   </form>
+
+  <div class="loading-overlay" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Processing your payment...</p>
+  </div>
+
+  <div class="success-popup" *ngIf="showSuccessPopup">
+    <div class="popup-content">
+      <i class="fas fa-check-circle success-icon"></i>
+      <h3>Payment Successful!</h3>
+      <p>{{ deliveryNotification?.message }}</p>
+      <p class="order-id-display">Order ID: <strong>#{{ paymentData.orderId }}</strong></p>
+    </div>
+  </div>
+
+  <div class="custom-alert" *ngIf="customAlertMessage">
+    <div class="alert-content">
+      <p>{{ customAlertMessage }}</p>
+      <button class="alert-close-btn" (click)="customAlertMessage = null">OK</button>
+    </div>
+  </div>
+
 </div>

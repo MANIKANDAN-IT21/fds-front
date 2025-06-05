@@ -12,17 +12,27 @@ import { CommonModule } from '@angular/common';
 })
 export class RestaurantListComponent implements OnInit {
   restaurants: any[] = [];
+  isLoading: boolean = true;
+  filteredRestaurants = []; // Updated based on filters
+  searchQuery: string = '';
+  selectedRating: string = 'All';
+  errorMessage: string | null = null;
 
   constructor(private restaurantService: RestaurantService, private router: Router) {}
 
   ngOnInit() {
     this.fetchRestaurants();
   }
+  
 
   fetchRestaurants() {
+    this.isLoading = true; // Set loading to true before fetching
+    this.errorMessage = null;
+    
     this.restaurantService.getAllRestaurants().subscribe({
       next: (data) => {
         this.restaurants = data;
+        this.filteredRestaurants = data;
         console.log('✅ Restaurants loaded:', this.restaurants);
       },
       error: (error) => {
@@ -31,7 +41,19 @@ export class RestaurantListComponent implements OnInit {
     });
   }
 
+  applyFilters() {
+    this.filteredRestaurants = this.restaurants.filter(restaurant => {
+      return (
+        restaurant.name.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
+        (this.selectedRating === 'All' || restaurant.rating >= parseFloat(this.selectedRating))
+      );
+    });
+  }
+
   viewRestaurantMenu(restaurantId: number) {
     this.router.navigate(['/restaurant', restaurantId]); // Navigate to restaurant detail page
   }
+
+
+
 }

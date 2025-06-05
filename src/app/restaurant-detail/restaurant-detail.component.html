@@ -1,12 +1,45 @@
 <div class="restaurant-detail-container">
-    <div *ngIf="restaurant">
-      <div class="restaurant-header">
-        <img [src]="restaurant.image" alt="{{ restaurant.name }}" class="restaurant-banner" />
-        <h1>{{ restaurant.name }}</h1>
-        <p class="restaurant-rating">⭐ Rating: {{ restaurant.rating }}</p>
+  <div *ngIf="restaurant" class="restaurant-content-wrapper">
+    <div class="restaurant-header-section">
+      <div class="restaurant-image-banner">
+        <img
+          [src]="restaurant.image"
+          alt="{{ restaurant.name }}"
+          class="restaurant-banner-img"
+        />
+        <div class="banner-overlay"></div>
+      </div>
+
+      <div class="restaurant-info-card">
+        <h1 class="restaurant-title">{{ restaurant.name }}</h1>
+        <p class="restaurant-cuisine">{{ restaurant.cuisine }}</p>
+        <div class="restaurant-meta-details">
+          <span class="restaurant-rating">
+            <i class="fas fa-star"></i> {{ restaurant.rating }}
+          </span>
+          <span class="restaurant-address">
+            <i class="fas fa-map-marker-alt"></i> chennai
+          </span>
+          <span class="restaurant-hours">
+            <i class="fas fa-clock"></i>
+            9:00 AM - 10:00 PM
+          </span>
         </div>
-  
-      <hr>
+        <p class="restaurant-description">{{ restaurant.description }}</p>
+      </div>
+    </div>
+
+    <hr class="section-divider" />
+
+    <div class="restaurant-menu-section">
       <app-menu-item-list></app-menu-item-list>
-      <router-outlet></router-outlet>
+    </div>
+
+    <router-outlet></router-outlet>
   </div>
+
+  <div *ngIf="!restaurant" class="loading-restaurant-message">
+    <div class="spinner"></div>
+    Loading restaurant details...
+  </div>
+</div>

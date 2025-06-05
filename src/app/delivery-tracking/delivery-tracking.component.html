@@ -1,29 +1,66 @@
 <div class="tracking-container">
-    <h2>Order Tracking</h2>
+    <h2 class="tracking-title">Order Tracking</h2>
   
-    <div *ngIf="errorMessage" class="error-message">
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="spinner"></div>
+      <p>{{ loadingMessage }}</p>
+    </div>
+  
+    <div *ngIf="errorMessage && !isLoading" class="error-message">
+      <i class="fas fa-exclamation-circle error-icon"></i>
       <p>{{ errorMessage }}</p>
     </div>
   
-    <div *ngIf="!errorMessage">
-      <p><strong>Order ID:</strong> {{ orderId }}</p>
-      <p><strong>Delivery Status:</strong> {{ trackingStatus }}</p>
-      <p><strong>Current Location:</strong> {{ mapLocation }}</p>
+    <div *ngIf="!errorMessage && !isLoading && orderId">
+      <div class="order-details-card">
+        <p class="detail-item"><strong>Order ID:</strong> #{{ orderId }}</p>
+        <p class="detail-item"><strong>Delivery Status:</strong>
+          <span [class.status-pending]="trackingStatus === 'Pending' || trackingStatus === 'Assigned'"
+                [class.status-in-progress]="trackingStatus === 'In Progress'"
+                [class.status-delivered]="trackingStatus === 'Delivered'">
+            {{ trackingStatus }}
+          </span>
+        </p>
+        <p class="detail-item" *ngIf="estimatedDeliveryTime">
+          <strong>Estimated Delivery:</strong> {{ estimatedDeliveryTime }}
+        </p>
+      </div>
   
-      <div *ngIf="delivery && delivery.agentId">
+      <div class="map-section">
+        <h3>Live Location</h3>
+        <div class="map-placeholder">
+          <!-- Dummy Google Map Embed -->
+          <iframe
+            [src]="getMapUrl()"
+            width="100%"
+            height="300"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Order Tracking Map"
+          ></iframe>
+          <p class="map-location-text">{{ mapLocation }}</p>
+        </div>
+      </div>
+  
+      <div *ngIf="delivery && delivery.agentId " class="agent-details-card">
         <h3>Agent Details</h3>
-        <p><strong>Agent ID:</strong> {{ delivery.agentId }}</p>
-        <p>Contact Agent: (Simulated: +91 9876543210)</p>
+        <p class="detail-item"><strong>Agent ID:</strong> {{ delivery.agentId }}</p>
+        <p class="detail-item"><strong>Agent name:</strong> {{ agent?.name }}</p>
+        <p class="detail-item">
+          <strong>Contact Agent:</strong>
+          <a href="tel:+919876543210" class="call-agent-btn">
+            <i class="fas fa-phone-alt"></i> Call Agent (Simulated)
+          </a>
+        </p>
       </div>
   
-      <div class="tracking-updates">
-        <h3>Live Updates (Simulated)</h3>
-        <p *ngIf="trackingStatus === 'In Progress'">Your order is currently with our delivery agent and on its way!</p>
-        <p *ngIf="trackingStatus === 'Delivered'">Your order has been successfully delivered!</p>
-        <p *ngIf="trackingStatus === 'Pending' || trackingStatus === 'Assigned'">We are preparing your order for dispatch. An agent will be assigned shortly.</p>
-        <p *ngIf="trackingStatus === 'Loading...'">Please wait while we fetch the latest delivery status.</p>
-      </div>
-  
-      <button class="refresh-button" (click)="refreshTracking()">Refresh Tracking</button>
+    
+      <button class="refresh-button" (click)="refreshTracking()" [disabled]="isLoading">
+        <span *ngIf="!isLoading"><i class="fas fa-sync-alt"></i> Refresh Status</span>
+        <span *ngIf="isLoading"><i class="fas fa-spinner fa-spin"></i> Refreshing...</span>
+      </button>
     </div>
   </div>
+  

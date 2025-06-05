@@ -23,31 +23,51 @@ export class CartComponent implements OnInit {
     });
   }
 
-  updateQuantity(item: CartItem, event: Event): void {
-    const newQuantity = parseInt((event.target as HTMLInputElement).value, 10);
-    if (!isNaN(newQuantity) && newQuantity > 0) { // Ensure quantity is a valid positive number
-      this.cartService.updateItemQuantity(item.itemId, newQuantity);
-    } else if (newQuantity <= 0) {
-        this.removeItem(item.itemId); // Remove item if quantity becomes 0 or less
+  updateQuantity(item: CartItem, newQuantity: number | Event): void {
+    let quantityValue: number;
+
+    // Determine quantity based on whether it's from button or input event
+    if (typeof newQuantity === 'number') {
+      quantityValue = newQuantity;
+    } else {
+      // It's an Event from the input field
+      quantityValue = parseInt((newQuantity.target as HTMLInputElement).value, 10);
+    }
+
+    if (!isNaN(quantityValue) && quantityValue > 0) {
+      this.cartService.updateItemQuantity(item.itemId, quantityValue);
+    } else if (quantityValue <= 0) {
+      this.removeItem(item.itemId); // Remove item if quantity becomes 0 or less
     }
   }
+
+  // Specifically for handling input field changes (ngModelChange)
+  onQuantityInputChange(item: CartItem, event: any): void {
+    const newQuantity = parseInt(event, 10); // ngModelChange gives the direct value
+    this.updateQuantity(item, newQuantity);
+  }
+
 
   removeItem(itemId: number): void {
     this.cartService.removeItemFromCart(itemId);
   }
 
   clearCart(): void {
-    if (confirm('Are you sure you want to clear your cart?')) {
+    if (confirm('Are you sure you want to clear all items from your cart?')) {
       this.cartService.clearCart();
     }
   }
 
-  // This method is called when the "Proceed to Checkout" button is clicked
   checkout(): void {
     if (this.cartItems.length === 0) {
       alert('Your cart is empty. Please add items before checking out.');
       return;
     }
     this.router.navigate(['/payment']); // Navigate to payment page
+  }
+
+  // TrackBy function for *ngFor performance optimization
+  trackByCartItem(index: number, item: CartItem): number {
+    return item.itemId; // Assuming itemId is unique
   }
 }

@@ -41,14 +41,28 @@
 </div>
 
 <div class="restaurant-container">
-    <h2>Our Restaurants</h2>
+    <h2> Our Restaurants</h2>
+
+    <!-- Search & Filter -->
+    <div class="search-filter-container">
+        <input type="text" class="search-input" [(ngModel)]="searchQuery" (input)="applyFilters()" placeholder="🔍 Search restaurant...">
+        
+        <select class="rating-filter" [(ngModel)]="selectedRating" (change)="applyFilters()">
+            <option value="All">All Ratings</option>
+            <option value="4">4★ & Above</option>
+            <option value="4.5">4.5★ & Above</option>
+            <option value="5">5★ Only</option>
+        </select>
+    </div>
+
+    <!-- Restaurant Grid -->
     <div class="restaurant-grid">
-      <div class="restaurant-card" *ngFor="let restaurant of restaurants" (click)="viewRestaurantMenu(restaurant.id)">
+      <div class="restaurant-card" *ngFor="let restaurant of filteredRestaurants" (click)="viewRestaurantMenu(restaurant.id)">
         <img [src]="restaurant.image" alt="{{ restaurant.name }}" />
         <h3>{{ restaurant.name }}</h3>
         <p>⭐ Rating: {{ restaurant.rating }}</p>
         <button class="view-menu-button">View Menu</button>
       </div>
-      <p *ngIf="restaurants.length === 0">No restaurants available at the moment.</p>
+      <p *ngIf="filteredRestaurants.length === 0" class="no-restaurants">No restaurants found.</p>
     </div>
-  </div>
+</div>

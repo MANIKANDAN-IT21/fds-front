@@ -20,4 +20,8 @@ export class PaymentService {
 
     return this.http.post(this.apiUrl, data, { headers });
   }
+  savePayment(paymentData: any) {
+    return this.http.post('/api/payments', paymentData); // ✅ Replace with actual API endpoint
+  }
+
 }

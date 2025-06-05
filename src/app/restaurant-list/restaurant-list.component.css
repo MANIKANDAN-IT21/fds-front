@@ -1,76 +1,130 @@
+/* General Container Styles */
 .restaurant-container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 20px auto;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 50px 25px;
+  max-width: 1300px;
+  margin: 40px auto;
+  background: linear-gradient(135deg, #fff7e6, #ffd4a3);
+  border-radius: 12px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+/* Section Title */
+.restaurant-container h2 {
+  font-size: 3em;
+  font-weight: 800;
+  color: #ff5722;
+  letter-spacing: 1px;
+  margin-bottom: 50px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Restaurant Grid */
+.restaurant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 35px;
+  justify-content: center;
+  padding: 0 15px;
+}
+
+/* Restaurant Card */
+.restaurant-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.restaurant-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Styling */
+.restaurant-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-bottom: 4px solid #ff5722;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+/* Restaurant Name */
+.restaurant-card h3 {
+  color: #333;
+  font-size: 2em;
+  margin: 12px 0;
+  font-weight: 700;
+}
+
+/* Rating Section */
+.restaurant-rating {
+  font-size: 1.2em;
+  color: #ff9800;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* View Menu Button */
+.view-menu-button {
+  background: #ff5722;
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.view-menu-button:hover {
+  background: #e64a19;
+  transform: translateY(-2px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .restaurant-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
-  
   .restaurant-container h2 {
-    text-align: center;
-    color: #ff5722;
-    margin-bottom: 30px;
+    font-size: 2.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  .restaurant-grid {
+    grid-template-columns: 1fr;
+  }
+  .restaurant-container h2 {
     font-size: 2.2em;
   }
-  
-  .restaurant-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-  }
-  
-  .restaurant-card {
-    background-color: #fcfcfc;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer; /* Indicate it's clickable */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .restaurant-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  }
-  
-  .restaurant-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 15px;
-  }
-  
-  .restaurant-card h3 {
-    color: #333;
-    font-size: 1.5em;
-    margin-bottom: 10px;
-  }
-  
-  .restaurant-card p {
-    color: #666;
-    font-size: 1em;
-    margin-bottom: 15px;
-  }
-  
-  .view-menu-button {
-    background-color: #ff5722;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-    width: 100%; /* Make button full width */
-    margin-top: auto; /* Push to bottom */
-  }
-  
-  .view-menu-button:hover {
-    background-color: #e64a19;
-  }
+}
+.search-filter-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.search-input, .rating-filter {
+  padding: 12px;
+  font-size: 1.1em;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.search-input {
+  width: 60%;
+}
+
+.rating-filter {
+  width: 200px;
+}

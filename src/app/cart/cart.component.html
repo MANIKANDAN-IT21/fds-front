@@ -1,40 +1,68 @@
 <div class="cart-container">
-  <h2>Your Shopping Cart</h2>
+  <h2 class="cart-title">Your Shopping Cart</h2>
 
-  <div *ngIf="cartItems.length > 0; else emptyCart" class="cart-details">
-    <div class="cart-items">
-      <div class="cart-item-card" *ngFor="let item of cartItems">
-        <div class="item-info">
-          <h3>{{ item.name }}</h3>
-          <p>Price: ₹{{ item.price | number:'1.2-2' }}</p>
+  <div *ngIf="cartItems.length > 0; else emptyCart" class="cart-content">
+    <div class="cart-items-list">
+      <!-- Cart Item Header for desktop view -->
+      <div class="cart-items-header">
+        <span class="header-item-name">Item</span>
+        <span class="header-item-price">Price</span>
+        <span class="header-item-quantity">Quantity</span>
+        <span class="header-item-subtotal">Subtotal</span>
+        <span class="header-item-actions">Actions</span>
+      </div>
+
+      <div class="cart-item-card" *ngFor="let item of cartItems; trackBy: trackByCartItem">
+        <div class="item-main-info">
+          <!-- You might want to add an image here if your CartItem includes it -->
+          <!-- <img *ngIf="item.imageUrl" [src]="item.imageUrl" alt="{{ item.name }}" class="item-cart-image"> -->
+          <h3 class="item-name">{{ item.name }}</h3>
         </div>
-        <div class="item-actions">
-          <label for="quantity-{{item.itemId}}">Quantity:</label>
-          <input type="number" id="quantity-{{item.itemId}}"
-                 [ngModel]="item.quantity"
-                 (ngModelChange)="updateQuantity(item, $event)"
-                 min="1" max="99">
-          <p>Subtotal: ₹{{ (item.price * item.quantity) | number:'1.2-2' }}</p>
-          <button class="remove-button" (click)="removeItem(item.itemId)">Remove</button>
+        <p class="item-price">₹{{ item.price | number:'1.2-2' }}</p>
+        <div class="item-quantity-controls">
+          <button (click)="updateQuantity(item, item.quantity - 1)" [disabled]="item.quantity <= 1">-</button>
+          <input
+            type="number"
+            class="quantity-input"
+            [ngModel]="item.quantity"
+            (ngModelChange)="onQuantityInputChange(item, $event)"
+            min="1"
+            [attr.aria-label]="'Quantity for ' + item.name"
+          /> <!-- FIXED: Added self-closing slash here -->
+          <button (click)="updateQuantity(item, item.quantity + 1)">+</button>
+        </div>
+        <p class="item-subtotal">₹{{ (item.price * item.quantity) | number:'1.2-2' }}</p>
+        <div class="item-action-buttons">
+          <button class="remove-item-btn" (click)="removeItem(item.itemId)">
+            <i class="fas fa-trash-alt"></i> Remove
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="cart-summary">
-      <h3>Order Summary</h3>
-      <p>Total Items: {{ cartItems.length }}</p>
-      <div class="total-price">
-        <strong>Total Amount: ₹{{ totalPrice | number:'1.2-2' }}</strong>
+    <div class="cart-summary-card">
+      <h3 class="summary-title">Order Summary</h3>
+      <div class="summary-line">
+        <span>Total Items:</span>
+        <strong>{{ cartItems.length }}</strong>
       </div>
-      <button class="checkout-button" (click)="checkout()">Proceed to Checkout</button>
-      <button class="clear-cart-button" (click)="clearCart()">Clear Cart</button>
+      <div class="summary-line total-amount-line">
+        <span>Total Amount:</span>
+        <strong>₹{{ totalPrice | number:'1.2-2' }}</strong>
+      </div>
+
+      <button class="checkout-btn" (click)="checkout()">Proceed to Checkout</button>
+      <button class="clear-cart-btn" (click)="clearCart()">Clear Cart</button>
     </div>
   </div>
 
   <ng-template #emptyCart>
-    <div class="empty-cart-message">
-      <p>Your cart is empty. Start adding some delicious food!</p>
-      <button routerLink="/restaurants" class="go-to-restaurants">Browse Restaurants</button>
+    <div class="empty-cart-state">
+      <i class="fas fa-shopping-cart empty-cart-icon"></i>
+      <p class="empty-cart-message">Your cart is currently empty. Time to fill it with deliciousness!</p>
+      <button routerLink="/restaurants" class="browse-restaurants-btn">
+        <i class="fas fa-arrow-circle-right"></i> Start Ordering
+      </button>
     </div>
   </ng-template>
 </div>
