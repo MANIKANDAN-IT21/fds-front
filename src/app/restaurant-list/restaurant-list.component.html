@@ -1,68 +1,110 @@
-<div class="container mt-4">
-  <h2>Top Restaurant</h2>
-  <div class="row justify-content-center">
+<div class="top-brands-section">
+  <h2 class="section-title">Top Brand Restaurants</h2>
+  <div class="brands-grid">
     <!-- Card 1 -->
-    <div class="col-md-2">
-      <div class="card text-center rounded-circle  overflow-hidden" style="width: 10rem; height: 10rem;">
-        <img src="https://picsum.photos/200/200" class="card-img-top" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
+    <div class="brand-card">
+      <div class="brand-circle-img">
+        <img src="/pizza.png" alt="Brand 1" class="brand-img">
       </div>
+      <p class="brand-name">Pizza-Hut</p>
     </div>
     <!-- Card 2 -->
-    <div class="col-md-2">
-      <div class="card text-center rounded-circle overflow-hidden" style="width: 10rem; height: 10rem;">
-        <img src="https://picsum.photos/201/200" class="card-img-top" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
+    <div class="brand-card">
+      <div class="brand-circle-img">
+        <img src="/kfc.png" alt="Brand 2" class="brand-img">
       </div>
+      <p class="brand-name">KFC</p>
     </div>
     <!-- Card 3 -->
-    <div class="col-md-2">
-      <div class="card text-center rounded-circle overflow-hidden" style="width: 10rem; height: 10rem;">
-        <img src="https://picsum.photos/202/200" class="card-img-top" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
+    <div class="brand-card">
+      <div class="brand-circle-img">
+        <img src="/buggerking.png" alt="Brand 3" class="brand-img">
       </div>
+      <p class="brand-name">Bugger-King</p>
     </div>
     <!-- Card 4 -->
-    <div class="col-md-2">
-      <div class="card text-center rounded-circle overflow-hidden" style="width: 10rem; height: 10rem;">
-        <img src="https://picsum.photos/203/200" class="card-img-top" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
+    <div class="brand-card">
+      <div class="brand-circle-img">
+        <img src="/mc.png" alt="Brand 4" class="brand-img">
       </div>
+      <p class="brand-name">mcdonald's</p>
     </div>
     <!-- Card 5 -->
-    <div class="col-md-2">
-      <div class="card text-center rounded-circle overflow-hidden" style="width: 10rem; height: 10rem;">
-        <img src="https://picsum.photos/204/200" class="card-img-top" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
+    <div class="brand-card">
+      <div class="brand-circle-img">
+        <img src="/domino.png" alt="Brand 5" class="brand-img">
       </div>
+      <p class="brand-name">domino's pizza</p>
     </div>
     <!-- Card 6 -->
-    <div class="col-md-2">
-      <div class="card text-center rounded-circle overflow-hidden" style="width: 10rem; height: 10rem;">
-        <img src="https://picsum.photos/205/200" class="card-img-top" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
+    <div class="brand-card">
+      <div class="brand-circle-img">
+        <img src="/startbucks.png" alt="Brand 6" class="brand-img">
       </div>
+      <p class="brand-name">Starbucks</p>
     </div>
   </div>
 </div>
 
+
 <div class="restaurant-container">
-    <h2> Our Restaurants</h2>
+  <h2 class="section-title">Our Restaurants</h2>
 
-    <!-- Search & Filter -->
-    <div class="search-filter-container">
-        <input type="text" class="search-input" [(ngModel)]="searchQuery" (input)="applyFilters()" placeholder="🔍 Search restaurant...">
-        
-        <select class="rating-filter" [(ngModel)]="selectedRating" (change)="applyFilters()">
-            <option value="All">All Ratings</option>
-            <option value="4">4★ & Above</option>
-            <option value="4.5">4.5★ & Above</option>
-            <option value="5">5★ Only</option>
-        </select>
+  <div class="location-display">
+    <i class="fas fa-map-marker-alt location-icon"></i>
+    <span>Location: <strong>Chennai</strong></span>
+  </div>
+
+  <!-- Search & Filter -->
+  <div class="search-filter-container">
+    <div class="search-input-group">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" class="search-input" [(ngModel)]="searchQuery" (input)="applyFilters()" placeholder="Search restaurant by name or cuisine...">
     </div>
 
-    <!-- Restaurant Grid -->
-    <div class="restaurant-grid">
-      <div class="restaurant-card" *ngFor="let restaurant of filteredRestaurants" (click)="viewRestaurantMenu(restaurant.id)">
-        <img [src]="restaurant.image" alt="{{ restaurant.name }}" />
-        <h3>{{ restaurant.name }}</h3>
-        <p>⭐ Rating: {{ restaurant.rating }}</p>
-        <button class="view-menu-button">View Menu</button>
+    <div class="filter-input-group">
+      <i class="fas fa-star filter-icon"></i>
+      <select class="rating-filter" [(ngModel)]="selectedRating" (change)="applyFilters()">
+        <option value="All">All Ratings</option>
+        <option value="4">4★ & Above</option>
+        <option value="4.5">4.5★ & Above</option>
+        <option value="5">5★ Only</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Restaurant Grid -->
+  <div class="restaurant-grid">
+    <div class="restaurant-card" *ngFor="let restaurant of filteredRestaurants; trackBy: trackByRestaurantId">
+      <div class="card-image-wrapper" (click)="viewRestaurantMenu(restaurant.id)">
+        <img [src]="restaurant.image" alt="{{ restaurant.name }}" class="restaurant-image" />
+        <div class="favorite-icon" (click)="toggleFavorite(restaurant); $event.stopPropagation();">
+          <i class="fas fa-heart" [class.favorited]="isFavorited(restaurant.id)"></i>
+        </div>
       </div>
-      <p *ngIf="filteredRestaurants.length === 0" class="no-restaurants">No restaurants found.</p>
+      <div class="card-content">
+        <h3 class="restaurant-name">{{ restaurant.name }}</h3>
+        <p class="restaurant-rating">⭐ Rating: {{ restaurant.rating }}</p>
+        <p class="restaurant-distance">
+          <i class="fas fa-route"></i> {{ restaurant.distanceKm }} km away
+        </p>
+        <button class="view-menu-button" (click)="viewRestaurantMenu(restaurant.id)">
+          View Menu <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
     </div>
+    <div *ngIf="filteredRestaurants.length === 0" class="no-restaurants-found">
+      <i class="fas fa-frown"></i>
+      <p>No restaurants found matching your criteria.</p>
+      <button class="reset-filters-button" (click)="resetFilters()">Reset Filters</button>
+    </div>
+  </div>
+</div>
+
+<!-- Custom Alert/Message Box (instead of native alert) -->
+<div class="custom-alert" *ngIf="customAlertMessage">
+  <div class="alert-content">
+    <p>{{ customAlertMessage }}</p>
+    <button class="alert-close-btn" (click)="customAlertMessage = null">OK</button>
+  </div>
 </div>

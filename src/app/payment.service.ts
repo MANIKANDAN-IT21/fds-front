@@ -15,13 +15,10 @@ export class PaymentService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
+      'Accept': 'application/json', // ✅ Ensures the server accepts JSON
       'Authorization': `Bearer ${token}`
     });
 
-    return this.http.post(this.apiUrl, data, { headers });
+    return this.http.post(this.apiUrl, JSON.stringify(data), { headers });
   }
-  savePayment(paymentData: any) {
-    return this.http.post('/api/payments', paymentData); // ✅ Replace with actual API endpoint
-  }
-
 }

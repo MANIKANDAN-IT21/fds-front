@@ -1,66 +1,81 @@
 <div class="tracking-container">
-    <h2 class="tracking-title">Order Tracking</h2>
-  
-    <div *ngIf="isLoading" class="loading-state">
-      <div class="spinner"></div>
-      <p>{{ loadingMessage }}</p>
+  <h2 class="tracking-title">Order Tracking</h2>
+
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>{{ loadingMessage }}</p>
+  </div>
+
+  <div *ngIf="errorMessage && !isLoading" class="error-message">
+    <i class="fas fa-exclamation-circle error-icon"></i>
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="!errorMessage && !isLoading && orderId">
+    <div class="order-details-card">
+      <p class="detail-item"><strong>Order ID:</strong> #{{ orderId }}</p>
+      <p class="detail-item"><strong>Delivery Status:</strong>
+        <span [class.status-pending]="trackingStatus === 'Pending' || trackingStatus === 'Assigned'"
+              [class.status-in-progress]="trackingStatus === 'In Progress'"
+              [class.status-delivered]="trackingStatus === 'Delivered'">
+          {{ trackingStatus }}
+        </span>
+      </p>
+      <p class="detail-item" *ngIf="estimatedDeliveryTime">
+        <strong>Estimated Delivery:</strong> {{ estimatedDeliveryTime }}
+      </p>
     </div>
-  
-    <div *ngIf="errorMessage && !isLoading" class="error-message">
-      <i class="fas fa-exclamation-circle error-icon"></i>
-      <p>{{ errorMessage }}</p>
-    </div>
-  
-    <div *ngIf="!errorMessage && !isLoading && orderId">
-      <div class="order-details-card">
-        <p class="detail-item"><strong>Order ID:</strong> #{{ orderId }}</p>
-        <p class="detail-item"><strong>Delivery Status:</strong>
-          <span [class.status-pending]="trackingStatus === 'Pending' || trackingStatus === 'Assigned'"
-                [class.status-in-progress]="trackingStatus === 'In Progress'"
-                [class.status-delivered]="trackingStatus === 'Delivered'">
-            {{ trackingStatus }}
-          </span>
-        </p>
-        <p class="detail-item" *ngIf="estimatedDeliveryTime">
-          <strong>Estimated Delivery:</strong> {{ estimatedDeliveryTime }}
-        </p>
-      </div>
-  
-      <div class="map-section">
-        <h3>Live Location</h3>
-        <div class="map-placeholder">
-          <!-- Dummy Google Map Embed -->
-          <iframe
-            [src]="getMapUrl()"
-            width="100%"
-            height="300"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Order Tracking Map"
-          ></iframe>
-          <p class="map-location-text">{{ mapLocation }}</p>
+
+    <!-- New: Vertical Tracking Timeline -->
+    <div class="tracking-timeline-container">
+      <h3>Order Progress</h3>
+      <div class="timeline-wrapper">
+        <div class="timeline-item" *ngFor="let stage of timelineStages">
+          <div class="timeline-dot" [class.active]="isStageActive(stage.status)" [class.completed]="isStageCompleted(stage.status)">
+            <i class="fas" [ngClass]="stage.iconClass"></i>
+          </div>
+          <div class="timeline-content">
+            <h4>{{ stage.title }}</h4>
+            <p>{{ getTimelineMessage(stage.status) }}</p>
+          </div>
         </div>
       </div>
-  
-      <div *ngIf="delivery && delivery.agentId " class="agent-details-card">
-        <h3>Agent Details</h3>
-        <p class="detail-item"><strong>Agent ID:</strong> {{ delivery.agentId }}</p>
-        <p class="detail-item"><strong>Agent name:</strong> {{ agent?.name }}</p>
-        <p class="detail-item">
-          <strong>Contact Agent:</strong>
-          <a href="tel:+919876543210" class="call-agent-btn">
-            <i class="fas fa-phone-alt"></i> Call Agent (Simulated)
-          </a>
-        </p>
-      </div>
-  
-    
-      <button class="refresh-button" (click)="refreshTracking()" [disabled]="isLoading">
-        <span *ngIf="!isLoading"><i class="fas fa-sync-alt"></i> Refresh Status</span>
-        <span *ngIf="isLoading"><i class="fas fa-spinner fa-spin"></i> Refreshing...</span>
-      </button>
     </div>
+
+    <div class="map-section">
+      <h3>Live Location</h3>
+      <div class="map-placeholder">
+        <!-- Dummy Google Map Embed -->
+        <iframe
+          [src]="getMapUrl()"
+          width="100%"
+          height="300"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Order Tracking Map"
+        ></iframe>
+        <p class="map-location-text">{{ mapLocation }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="delivery && delivery.agentId" class="agent-details-card">
+      <h3>Agent Details</h3>
+      <p class="detail-item"><strong>Agent ID:</strong> {{ delivery.agentId }}</p>
+      <!-- Now display agent name if fetched -->
+      <p class="detail-item" *ngIf="agent?.name"><strong>Agent Name:</strong> {{ delivery.name }}</p>
+      <p class="detail-item">
+        <strong>Contact Agent:</strong>
+        <a href="tel:+919876543210" class="call-agent-btn">
+          <i class="fas fa-phone-alt"></i> Call Agent (Simulated)
+        </a>
+      </p>
+    </div>
+
+    <button class="refresh-button" (click)="refreshTracking()" [disabled]="isLoading">
+      <span *ngIf="!isLoading"><i class="fas fa-sync-alt"></i> Refresh Status</span>
+      <span *ngIf="isLoading"><i class="fas fa-spinner fa-spin"></i> Refreshing...</span>
+    </button>
   </div>
-  
+</div>

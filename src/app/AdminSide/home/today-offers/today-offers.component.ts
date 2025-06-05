@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { RestaurantService } from '../../../restaurant.service';
 import { CommonModule } from '@angular/common';
+import { RestaurantListComponent } from '../../../restaurant-list/restaurant-list.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-today-offers',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink,RestaurantListComponent],
   templateUrl: './today-offers.component.html',
   styleUrl: './today-offers.component.css'
 })

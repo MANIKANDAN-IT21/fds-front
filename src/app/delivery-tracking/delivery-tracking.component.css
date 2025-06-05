@@ -1,397 +1,498 @@
 .tracking-container {
-    max-width: 800px; /* Increased max-width */
-    margin: 40px auto;
-    padding: 30px;
-    border-radius: 15px;
-    background-color: #ffffff;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    text-align: center;
-    font-family: 'Open Sans', sans-serif; /* Modern font */
-    color: #333;
-    position: relative; /* For loading overlay */
+  max-width: 800px; /* Increased max-width */
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  font-family: 'Open Sans', sans-serif; /* Modern font */
+  color: #333;
+  position: relative; /* For loading overlay positioning */
+}
+
+.tracking-title {
+  color: #2c3e50; /* Darker, more professional title */
+  margin-bottom: 30px;
+  font-size: 2.8em;
+  font-weight: 700;
+  position: relative;
+}
+
+.tracking-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 4px;
+  background-color: #f39c12; /* Accent color */
+  border-radius: 2px;
+}
+
+h3 {
+  color: #34495e;
+  margin-top: 35px;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 10px;
+  line-height: 1.6;
+  font-size: 1.1em;
+}
+
+strong {
+  color: #2c3e50;
+}
+
+/* Card Styles */
+.order-details-card,
+.agent-details-card,
+.tracking-updates-card { /* Kept for general structure, but specific update messages are now in timeline */
+  background-color: #f8f9fa; /* Light background for cards */
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+/* Status Colors */
+.status-pending, .status-assigned {
+  color: #f39c12; /* Orange */
+  font-weight: bold;
+}
+
+.status-in-progress {
+  color: #3498db; /* Blue */
+  font-weight: bold;
+}
+
+.status-delivered {
+  color: #27ae60; /* Green */
+  font-weight: bold;
+}
+
+/* Map Section */
+.map-section {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.map-placeholder {
+  position: relative;
+  width: 100%;
+  height: 300px; /* Fixed height for the map */
+  background-color: #e0e0e0; /* Placeholder background */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.map-placeholder iframe {
+  border-radius: 12px;
+}
+
+.map-location-text {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 0.95em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+}
+
+/* Agent Details */
+.call-agent-btn {
+  background-color: #3498db; /* Blue for call button */
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.95em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+}
+
+.call-agent-btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+/* Tracking Updates (Timeline - NEW) */
+.tracking-timeline-container {
+  margin-top: 30px;
+  margin-bottom: 40px;
+  background-color: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+.timeline-wrapper {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-left: 30px; /* Space for the vertical line */
+}
+
+/* Vertical Line */
+.timeline-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 14px; /* Align with dots */
+  width: 2px;
+  height: 100%;
+  background-color: #dcdcdc; /* Light gray line */
+  z-index: 0;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1; /* Ensure items are above the line */
+}
+
+.timeline-dot {
+  background-color: #ccc; /* Default dot color */
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9em;
+  flex-shrink: 0; /* Prevent shrinking */
+  margin-right: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.timeline-dot.active {
+  background-color: #3498db; /* Blue for active dot */
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
+}
+
+.timeline-dot.completed {
+  background-color: #2ecc71; /* Green for completed dot */
+  transform: scale(1.0); /* Reset scale if active was bigger */
+  box-shadow: 0 4px 10px rgba(46, 204, 113, 0.4);
+}
+
+.timeline-content {
+  flex-grow: 1;
+  padding-bottom: 5px; /* Space before next item */
+}
+
+.timeline-content h4 {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.timeline-content p {
+  font-size: 0.95em;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Refresh Button */
+.refresh-button {
+  background-color: #2ecc71; /* Green for refresh button */
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1.1em;
+  margin-top: 35px;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+}
+
+.refresh-button:hover:not(:disabled) {
+  background-color: #27ad60;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+}
+
+.refresh-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Loading State */
+.loading-state {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.4em;
+  color: #777;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.spinner {
+  border: 6px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #f39c12; /* Accent color for spinner */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-state p {
+  font-size: 1.5em;
+  color: #555;
+  font-weight: 500;
+}
+
+/* Error Message */
+.error-message {
+  color: #e74c3c; /* Red for errors */
+  background-color: #fdeded;
+  border: 1px solid #f5c6cb;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-align: left;
+}
+
+.error-icon {
+  font-size: 2em;
+  color: #e74c3c;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .tracking-container {
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+  }
+
   .tracking-title {
-    color: #2c3e50; /* Darker, more professional title */
-    margin-bottom: 30px;
-    font-size: 2.8em;
-    font-weight: 700;
-    position: relative;
+    font-size: 2.2em;
+    margin-bottom: 25px;
   }
-  
-  .tracking-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90px;
-    height: 4px;
-    background-color: #f39c12; /* Accent color */
-    border-radius: 2px;
-  }
-  
+
   h3 {
-    color: #34495e;
-    margin-top: 35px;
-    margin-bottom: 20px;
-    font-size: 1.8em;
-    font-weight: 600;
+    font-size: 1.6em;
+    margin-top: 25px;
+    margin-bottom: 15px;
   }
-  
+
   p {
-    margin-bottom: 10px;
-    line-height: 1.6;
-    font-size: 1.1em;
+    font-size: 1em;
   }
-  
-  strong {
-    color: #2c3e50;
-  }
-  
-  /* Card Styles */
+
   .order-details-card,
   .agent-details-card,
-  .tracking-updates-card {
-    background-color: #f8f9fa; /* Light background for cards */
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  }
-  
-  .detail-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px dashed #eee;
-  }
-  
-  .detail-item:last-child {
-    border-bottom: none;
-  }
-  
-  /* Status Colors */
-  .status-pending, .status-assigned {
-    color: #f39c12; /* Orange */
-    font-weight: bold;
-  }
-  
-  .status-in-progress {
-    color: #3498db; /* Blue */
-    font-weight: bold;
-  }
-  
-  .status-delivered {
-    color: #27ae60; /* Green */
-    font-weight: bold;
-  }
-  
-  /* Map Section */
-  .map-section {
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
-  
-  .map-placeholder {
-    position: relative;
-    width: 100%;
-    height: 300px; /* Fixed height for the map */
-    background-color: #e0e0e0; /* Placeholder background */
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .map-placeholder iframe {
-    border-radius: 12px;
-  }
-  
-  .map-location-text {
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 8px 15px;
-    border-radius: 8px;
-    font-size: 0.95em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 90%;
-  }
-  
-  /* Agent Details */
-  .call-agent-btn {
-    background-color: #3498db; /* Blue for call button */
-    color: white;
-    padding: 10px 18px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 0.95em;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
-  }
-  
-  .call-agent-btn:hover {
-    background-color: #2980b9;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-  }
-  
-  /* Tracking Updates */
-  .update-message {
-    background-color: #ecf0f1; /* Light gray for messages */
-    border-left: 5px solid #f39c12; /* Accent border */
-    padding: 15px;
-    border-radius: 8px;
-    font-style: italic;
-    color: #555;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .update-message i {
-    font-size: 1.3em;
-    color: #f39c12; /* Icon color matches accent */
-  }
-  
-  /* Refresh Button */
-  .refresh-button {
-    background-color: #2ecc71; /* Green for refresh button */
-    color: white;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 1.1em;
-    margin-top: 35px;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
-  }
-  
-  .refresh-button:hover:not(:disabled) {
-    background-color: #27ad60;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
-  }
-  
-  .refresh-button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-    box-shadow: none;
-  }
-  
-  /* Loading State */
-  .loading-state {
-    text-align: center;
-    padding: 50px;
-    font-size: 1.4em;
-    color: #777;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .spinner {
-    border: 6px solid rgba(0, 0, 0, 0.1);
-    border-top-color: #f39c12; /* Accent color for spinner */
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
-  /* Error Message */
-  .error-message {
-    color: #e74c3c; /* Red for errors */
-    background-color: #fdeded;
-    border: 1px solid #f5c6cb;
+  .tracking-timeline-container {
     padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    text-align: left;
+    margin-bottom: 20px;
   }
-  
-  .error-icon {
-    font-size: 2em;
-    color: #e74c3c;
+
+  .timeline-wrapper {
+    padding-left: 20px;
   }
-  
-  /* Responsive Adjustments */
-  @media (max-width: 768px) {
-    .tracking-container {
-      padding: 20px;
-      margin: 20px auto;
-      border-radius: 10px;
-    }
-  
-    .tracking-title {
-      font-size: 2.2em;
-      margin-bottom: 25px;
-    }
-  
-    h3 {
-      font-size: 1.6em;
-      margin-top: 25px;
-      margin-bottom: 15px;
-    }
-  
-    p {
-      font-size: 1em;
-    }
-  
-    .order-details-card,
-    .agent-details-card,
-    .tracking-updates-card {
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-  
-    .map-placeholder {
-      height: 250px;
-    }
-  
-    .map-location-text {
-      font-size: 0.9em;
-      padding: 6px 12px;
-    }
-  
-    .call-agent-btn {
-      padding: 8px 15px;
-      font-size: 0.9em;
-    }
-  
-    .update-message {
-      padding: 12px;
-      font-size: 0.95em;
-    }
-  
-    .update-message i {
-      font-size: 1.1em;
-    }
-  
-    .refresh-button {
-      padding: 12px 25px;
-      font-size: 1em;
-      margin-top: 30px;
-    }
-  
-    .loading-state p {
-      font-size: 1.2em;
-    }
-  
-    .spinner {
-      width: 50px;
-      height: 50px;
-    }
-  
-    .error-message {
-      padding: 15px;
-      font-size: 0.95em;
-    }
+
+  .timeline-wrapper::before {
+    left: 9px;
   }
-  
-  @media (max-width: 480px) {
-    .tracking-container {
-      padding: 15px;
-      margin: 15px;
-      box-shadow: none; /* Lighter on very small screens */
-    }
-  
-    .tracking-title {
-      font-size: 1.8em;
-      margin-bottom: 20px;
-    }
-  
-    h3 {
-      font-size: 1.4em;
-      margin-top: 20px;
-      margin-bottom: 10px;
-    }
-  
-    p {
-      font-size: 0.9em;
-    }
-  
-    .order-details-card,
-    .agent-details-card,
-    .tracking-updates-card {
-      padding: 15px;
-      margin-bottom: 15px;
-    }
-  
-    .map-placeholder {
-      height: 200px;
-    }
-  
-    .map-location-text {
-      font-size: 0.8em;
-      padding: 5px 10px;
-    }
-  
-    .call-agent-btn {
-      padding: 6px 12px;
-      font-size: 0.85em;
-    }
-  
-    .update-message {
-      padding: 10px;
-      font-size: 0.9em;
-    }
-  
-    .update-message i {
-      font-size: 1em;
-    }
-  
-    .refresh-button {
-      padding: 10px 20px;
-      font-size: 0.9em;
-      margin-top: 25px;
-    }
-  
-    .loading-state p {
-      font-size: 1.1em;
-    }
-  
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border-width: 4px;
-    }
-  
-    .error-message {
-      padding: 10px;
-      font-size: 0.9em;
-    }
+
+  .timeline-dot {
+    width: 25px;
+    height: 25px;
+    font-size: 0.8em;
+    margin-right: 15px;
   }
-  
+
+  .timeline-content h4 {
+    font-size: 1.1em;
+  }
+
+  .timeline-content p {
+    font-size: 0.9em;
+  }
+
+  .map-placeholder {
+    height: 250px;
+  }
+
+  .map-location-text {
+    font-size: 0.9em;
+    padding: 6px 12px;
+  }
+
+  .call-agent-btn {
+    padding: 8px 15px;
+    font-size: 0.9em;
+  }
+
+  .refresh-button {
+    padding: 12px 25px;
+    font-size: 1em;
+    margin-top: 30px;
+  }
+
+  .loading-state p {
+    font-size: 1.2em;
+  }
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+  }
+
+  .error-message {
+    padding: 15px;
+    font-size: 0.95em;
+  }
+}
+
+@media (max-width: 480px) {
+  .tracking-container {
+    padding: 15px;
+    margin: 15px;
+    box-shadow: none; /* Lighter on very small screens */
+  }
+
+  .tracking-title {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 1.4em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 0.9em;
+  }
+
+  .order-details-card,
+  .agent-details-card,
+  .tracking-timeline-container {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .timeline-wrapper {
+    padding-left: 15px;
+  }
+
+  .timeline-wrapper::before {
+    left: 7px;
+  }
+
+  .timeline-dot {
+    width: 22px;
+    height: 22px;
+    font-size: 0.7em;
+    margin-right: 10px;
+  }
+
+  .timeline-content h4 {
+    font-size: 1em;
+  }
+
+  .timeline-content p {
+    font-size: 0.85em;
+  }
+
+  .map-placeholder {
+    height: 200px;
+  }
+
+  .map-location-text {
+    font-size: 0.8em;
+    padding: 5px 10px;
+  }
+
+  .call-agent-btn {
+    padding: 6px 12px;
+    font-size: 0.85em;
+  }
+
+  .refresh-button {
+    padding: 10px 20px;
+    font-size: 0.9em;
+    margin-top: 25px;
+  }
+
+  .loading-state p {
+    font-size: 1.1em;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+  }
+
+  .error-message {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+}

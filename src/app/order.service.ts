@@ -40,6 +40,11 @@ export class OrderService {
     return this.http.get(`${this.baseUrl}/order/${orderId}`, { headers: this.getAuthHeaders() });
   }
 
+  updateOrder(orderId: number, status: string) {
+    return this.http.put(`/api/orders/${orderId}`, { status });
+  }
+  
+
   // Get delivery status by order ID (if separate from order details)
   getDeliveryStatus(orderId: number): Observable<any> {
     // This might be a specific endpoint for real-time tracking
